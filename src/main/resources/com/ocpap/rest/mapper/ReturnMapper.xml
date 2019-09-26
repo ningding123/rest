@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocpap.rest.mapper.ReturnMapper" >
+  <resultMap id="BaseResultMap" type="com.ocpap.rest.entity.ReturnOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="docid" property="docid" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert"  parameterType="com.ocpap.rest.entity.ReturnOrder">
+    insert into returnorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        docid,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.ocpap.rest.entity.ReturnOrder" >
+    update returnorder
+    <set >
+      <if test="docid != null" >
+        docid = #{docid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit =  #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findById" parameterType="Integer" resultMap="BaseResultMap">
+     select * from returnorder where id = #{id}
+  </select>
+  <select id="findAll" parameterType="com.ocpap.rest.entity.QueryVo" resultMap="BaseResultMap">
+    select * from returnorder
+    limit #{startRow},#{size}
+  </select>
+  <select id="count" parameterType="com.ocpap.rest.entity.QueryVo" resultType="Integer">
+    select count(*) from returnorder
+  </select>
+  <select id="findByOid" parameterType="Integer" resultMap="BaseResultMap">
+    select * from returnorder where oid = #{id}
+  </select>
+</mapper>

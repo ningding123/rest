@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ocpap.rest.mapper.AdminMapper">
+
+	<resultMap id="BaseResultMap" type="com.ocpap.rest.entity.AdminAccount" >
+    <id column="am_id" property="amId" jdbcType="INTEGER" />
+    <result column="u_status" property="uStatus" jdbcType="BIT" />
+    <result column="u_loginname" property="uLoginname" jdbcType="VARCHAR" />
+    <result column="u_password" property="uPassword" jdbcType="VARCHAR" />
+    <result column="am_name" property="amName" jdbcType="VARCHAR" />
+    <result column="expiredate" property="expiredate" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="last_logindate" property="lastLogindate" jdbcType="VARCHAR" />
+    <result column="last_loginip" property="lastLoginip" jdbcType="CHAR" />
+    <result column="visit_count" property="visitCount" jdbcType="INTEGER" />
+    <result column="last_edit" property="lastEdit" jdbcType="VARCHAR" />
+    <result column="created_user" property="createdUser" jdbcType="CHAR" />
+    <result column="ag_id" property="agId" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+
+
+	<!--分页查询总数  -->
+	<select id="adminCountByQueryVo" parameterType="com.ocpap.rest.entity.QueryVo"
+		resultType="Integer">
+		select count(1) from tb_admin_account
+		<where>
+			<if test="amName != null and amName != ''">
+				am_name like "%"#{amName}"%"
+			</if>
+			<if test="agId!= 0 and agId != null">
+				and ag_id = #{agId}
+			</if>
+		</where>
+	</select>
+	
+	<!--结果集 -->
+	<select id="selectAdminListByQueryVo" parameterType="com.ocpap.rest.entity.QueryVo"
+		resultMap="BaseResultMap">
+		select * from tb_admin_account
+		<where>
+			<if test="amName != null and amName != ''">
+				 am_name like "%"#{amName}"%"
+			</if>
+			<if test="agId != 0 and agId != null">
+				and ag_id = #{agId}
+			</if>
+		</where>
+		limit #{startRow},#{size}
+	</select>
+
+
+	<select id="findUserByNameAndPwd" resultMap="BaseResultMap" parameterType="com.ocpap.rest.entity.AdminAccount">
+		select * from tb_admin_account
+		<where>
+			<if test="uLoginname!=null and uLoginname!=''">
+				u_loginname=#{uLoginname}
+			</if>
+			<if test="uPassword!=null and uPassword!=''">
+				and u_password=#{uPassword}
+			</if>
+		</where>
+		
+	</select>
+	
+	<insert id="insertAdmin"  parameterType="com.ocpap.rest.entity.AdminAccount">
+		insert into tb_admin_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="amId != null" >
+        am_id,
+      </if>
+      <if test="uStatus != null" >
+        u_status,
+      </if>
+      <if test="uLoginname != null" >
+        u_loginname,
+      </if>
+      <if test="uPassword != null" >
+        u_password,
+      </if>
+      <if test="amName != null" >
+        am_name,
+      </if>
+      <if test="expiredate != null" >
+        expiredate,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="lastLogindate != null" >
+        last_logindate,
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="visitCount != null" >
+        visit_count,
+      </if>
+      <if test="lastEdit != null" >
+        last_edit,
+      </if>
+      <if test="createdUser != null" >
+        created_user,
+      </if>
+      <if test="agId != null" >
+        ag_id,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+        <if test="type != null" >
+            type,
+        </if>
+        <if test="job != null" >
+            job,
+        </if>
+        <if test="unit != null" >
+            unit,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="amId != null" >
+        #{amId,jdbcType=INTEGER},
+      </if>
+      <if test="uStatus != null" >
+        #{uStatus,jdbcType=BIT},
+      </if>
+      <if test="uLoginname != null" >
+        #{uLoginname,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null" >
+        #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="amName != null" >
+        #{amName,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredate != null" >
+        #{expiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogindate != null" >
+        #{lastLogindate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginip != null" >
+        #{lastLoginip,jdbcType=CHAR},
+      </if>
+      <if test="visitCount != null" >
+        #{visitCount,jdbcType=INTEGER},
+      </if>
+      <if test="lastEdit != null" >
+        #{lastEdit,jdbcType=VARCHAR},
+      </if>
+      <if test="createdUser != null" >
+        #{createdUser,jdbcType=CHAR},
+      </if>
+      <if test="agId != null" >
+        #{agId,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+        <if test="type != null" >
+            #{type,jdbcType=INTEGER},
+        </if>
+        <if test="job != null" >
+            #{job,jdbcType=VARCHAR},
+        </if>
+        <if test="unit != null" >
+            #{unit,jdbcType=VARCHAR},
+        </if>
+    </trim>
+	</insert>
+	<update id="saveUpdate" parameterType="com.ocpap.rest.entity.AdminAccount" >
+		 update tb_admin_account
+    <set >
+      <if test="uStatus != null" >
+        u_status = #{uStatus,jdbcType=BIT},
+      </if>
+      <if test="uLoginname != null" >
+        u_loginname = #{uLoginname,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null" >
+       u_password = #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="amName != null" >
+        am_name = #{amName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogindate != null">
+      last_logindate = #{lastLogindate},
+      </if>
+      <if test="lastLoginip!= null">
+      last_loginip = #{lastLoginip},
+      </if>
+      <if test ="visitCount != null">
+      	visit_count = #{visitCount},
+      </if>
+      <if test="lastEdit!=null">
+       last_edit = #{lastEdit},
+      </if>
+      <if test="createdUser!=null">
+      created_user = #{createdUser},
+      </if>
+      <if test="agId != null" >
+        ag_id = #{agId,jdbcType=INTEGER},
+      </if>
+      <if test="createdate!=null">
+       createdate = #{createdate},
+      </if>
+        <if test="job!=null">
+            job = #{job},
+        </if>
+        <if test="unit!=null">
+            unit = #{unit},
+        </if>
+        <if test="type!=null">
+            type = #{type},
+        </if>
+    </set>
+    where am_id = #{amId,jdbcType=INTEGER}
+	</update>
+	<select id="findAdminById" parameterType="com.ocpap.rest.entity.AdminAccount" resultMap="BaseResultMap">
+		select * from tb_admin_account where am_id=#{amId}
+	</select>
+	<select id="findAllAccount" resultMap="BaseResultMap">
+        select  * from tb_admin_account
+    </select>
+	
+
+</mapper>

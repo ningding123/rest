@@ -1,0 +1,98 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.content {
+  margin: 0 auto;
+  width: 600px;
+  height: 600px;
+  border: 1px solid #000;
+  margin-top: 50px;
+}
+.header {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-bottom: 1px solid #000;
+}
+.list {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #000;
+  line-height: 50px;
+}
+.list .line {
+  border-right: 1px solid #000;
+}
+.box {
+  display: inline-block;
+  height: 100%;
+}
+
+.text {
+  width: 32px;
+}
+.text1 {
+  width: 80px;
+}
+.text2 {
+  width: 70px;
+}
+.name {
+  width: 80px;
+  text-align: center;
+}
+.number {
+  width: 120px;
+  text-align: center;
+}
+.sex {
+  width: 80px;
+  text-align: center;
+}
+.age {
+  width: 80px;
+  text-align: center;
+}
+.date {
+  width: 100px;
+}
+.tel {
+  width: 120px;
+}
+.address {
+  width: 160px;
+}
+.list1 {
+  width: 100%;
+  height: 150px;
+  line-height: 50px;
+}
+.garyline {
+  border-bottom: 1px solid #e8e8e8;
+}
+.textarea {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #000;
+  word-wrap: break-word;word-break: break-all;overflow: hidden;
+  line-height: 30px;
+}
+.text3 {
+  margin-left: 400px;
+}
+.list3 {
+  line-height: 40px;
+}
+
+.btn {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
+  border:1px solid #fff;
+  background: #e8e8e8;
+  text-align: center;
+  margin-top: 20px;
+margin-left: 500px;
+}

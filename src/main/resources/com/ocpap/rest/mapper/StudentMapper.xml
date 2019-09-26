@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocpap.rest.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.ocpap.rest.entity.Student">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="eyear" property="eyear" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="studentdesc" property="studentdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="findAll" parameterType="com.ocpap.rest.entity.QueryVo" resultMap="BaseResultMap">
+  select * from student
+  <where>
+    <if test="name != null and name != ''">
+      name like "%"#{name}"%"
+    </if>
+  </where>
+  limit #{startRow},#{size}
+</select>
+  <select id="count" parameterType="com.ocpap.rest.entity.QueryVo" resultType="Integer">
+    select count(*) from student
+    <where>
+      <if test="name != null and name != ''">
+        name like "%"#{name}"%"
+      </if>
+    </where>
+  </select>
+  <update id="delete" parameterType="Integer">
+    delete from student where id = #{id}
+  </update>
+  <insert id="insert"  parameterType="com.ocpap.rest.entity.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="eyear != null" >
+        eyear,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="studentdesc != null" >
+        studentdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="eyear != null" >
+        #{eyear,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentdesc != null" >
+        #{studentdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.ocpap.rest.entity.Student" >
+    update student
+    <set >
+      <if test="name != null" >
+         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+       sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+       year =  #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="eyear != null" >
+        eyear = #{eyear,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentdesc != null" >
+        studentdesc = #{studentdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findById" parameterType="Integer" resultMap="BaseResultMap">
+    select  * from student where id = #{id}
+  </select>
+  <select id="findAllStudent" resultMap="BaseResultMap">
+    select  * from student
+  </select>
+</mapper>

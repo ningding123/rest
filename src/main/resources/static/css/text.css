@@ -1,0 +1,41 @@
+.clearfix:after {  content: "."; display: block; height: 0; clear: both; visibility: hidden;  }
+
+.clearfix {*zoom: 1;}   /* IE6、7 专有 */
+.tree_main{
+	color:#999;
+    width: 300px;
+}
+.tree_th{
+    width: 280px;
+    height: 30px;
+    border-radius: 5px;
+    line-height: 30px;
+    padding-left: 20px;
+}
+.tree_l{
+    width: 30px;
+    height: 30px;
+    background-image: url("../img/jt1.png") ;
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: 4px 5px;
+}
+.tree_th div{
+    float: left;
+}
+.tree_li li{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    line-height: 30px;
+    padding-left: 100px;
+    list-style: none;
+    background-image: url("../img/qxgl.png") ;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 74px 5px;
+}
+.tree_li.btn{
+    display: none;
+}
+

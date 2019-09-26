@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocpap.rest.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ocpap.rest.entity.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ordernumber" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="stuid" property="stuid" jdbcType="INTEGER" />
+    <result column="docid" property="docid" jdbcType="INTEGER" />
+    <result column="studesc" property="studesc" jdbcType="VARCHAR" />
+      <result column="cause" property="cause" jdbcType="VARCHAR" />
+      <result column="status" property="status" jdbcType="INTEGER" />
+      <result column="sstatus" property="sstatus" jdbcType="INTEGER" />
+      <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="treate" property="treate" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+
+  </resultMap>
+  <select id="findById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from studentorder where id = #{id}
+  </select>
+  <select id="findAll" parameterType="com.ocpap.rest.entity.QueryVo" resultMap="BaseResultMap">
+    select * from studentorder
+    <where>
+      <if test="ordernumber != null and ordernumber != ''">
+        ordernumber like "%"#{ordernumber}"%" and
+      </if>
+      <if test="status != null and status != ''">
+         status = #{status}
+      </if>
+      <if test="sstatus != null and sstatus != ''">
+        and sstatus = #{sstatus}
+      </if>
+    </where>
+    limit #{startRow},#{size}
+  </select>
+  <select id="count" parameterType="com.ocpap.rest.entity.QueryVo" resultType="Integer">
+    select count(*) from studentorder
+    <where>
+      <if test="ordernumber != null and ordernumber != ''">
+        ordernumber like "%"#{ordernumber}"%" and
+      </if>
+      <if test="status != null and status != ''">
+        status = #{status}
+      </if>
+      <if test="sstatus != null and sstatus != ''">
+        and sstatus = #{sstatus}
+      </if>
+    </where>
+  </select>
+  <insert id="insert"  parameterType="com.ocpap.rest.entity.Order">
+    insert into studentorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordernumber != null" >
+        ordernumber,
+      </if>
+      <if test="stuid != null" >
+        stuid,
+      </if>
+      <if test="docid != null" >
+        docid,
+      </if>
+      <if test="studesc != null" >
+        studesc,
+      </if>
+      <if test="cause != null" >
+        cause,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sstatus != null" >
+        sstatus,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="docid != null" >
+        #{docid,jdbcType=INTEGER},
+      </if>
+      <if test="studesc != null" >
+        #{studesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sstatus != null" >
+        #{sstatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.ocpap.rest.entity.Order" >
+    update studentorder
+    <set >
+      <if test="ordernumber != null" >
+        ordernumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stuid != null" >
+        stuid = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="docid != null" >
+        docid =  #{docid,jdbcType=INTEGER},
+      </if>
+      <if test="studesc != null" >
+        studesc = #{studesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        cause = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sstatus != null" >
+        sstatus = #{sstatus,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="treate != null" >
+        treate = #{treate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

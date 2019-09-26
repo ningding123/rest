@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+
+.my_dw {
+	float: right;
+	width: 101%;
+	font-size: 15px;
+}
+
+.my_dw ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	color: #23abf0;
+	text-align: left;
+}
+
+.my_dw ul li {
+	display: inline-block;
+	margin: 0 1%;
+}
+
+.my_input {
+	padding: 0 !important;
+	text-align: left !important;
+	display: inline-block !important;
+	border-left: none !important;
+	border-right: none !important;
+	border-top: none !important;
+	border-bottom: 1px solid #0e90d2 !important;
+	width: 10% !important;
+	height: 2.8rem !important;
+}
+
+.my_dws {
+	width: 35.3px;
+	height: 35.3px;
+	border: 1px solid #ddd;
+	text-align: center;
+	border-radius: 10%;
+	padding: 3px 0 0;
+}
+
+.my_dws:hover {
+	background: #dddddd;
+}
+
+.myli {
+	font-weight: 400;
+	line-height: 1.6;
+	color: #333;
+	float: right;
+	padding: 0;
+	margin: 0;
+}
+
+.myli ul {
+	position: relative;
+	padding-left: 0;
+	margin: 1.5rem 0;
+	list-style: none;
+	color: #999;
+	text-align: left;
+}
+
+.myli ul li {
+	display: inline-block;
+	list-style: none;
+	box-sizing: border-box;
+	color: #999;
+	text-align: left;
+	font-weight: 400;
+	line-height: 1.6;
+}
+
+.myli ul li a {
+	color: #23abf0;
+	border-radius: 3px;
+	padding: 9px 14px !important;
+	position: relative;
+	display: block;
+	text-decoration: none;
+	line-height: 1.2;
+	margin-bottom: 5px;
+	margin-right: -17px;
+	border: 1px solid #ddd;
+	width: 39.7px;
+	height: 39.7px;
+}
+

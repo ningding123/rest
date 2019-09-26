@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocpap.rest.mapper.AdminGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.ocpap.rest.entity.AdminGroup" >
+    <id column="ag_id" property="agId" jdbcType="INTEGER" />
+    <result column="ag_name" property="agName" jdbcType="VARCHAR" />
+    <result column="ag_info" property="agInfo" jdbcType="VARCHAR" />
+    <result column="ag_status" property="agStatus" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ocpap.rest.entity.AdminGroup" extends="BaseResultMap" >
+    <result column="ag_auth" property="agAuth" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ag_id, ag_name, ag_info, ag_status,ag_auth
+  </sql>
+  <select id="findAllGroup" resultMap="ResultMapWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from tb_admin_group
+  </select>
+  
+  <!--分页查询总数  -->
+	<select id="CountByQueryVo" parameterType="com.ocpap.rest.entity.QueryVo"
+		resultType="Integer">
+		select count(1) from tb_admin_group
+		<where>
+			<if test="agName != null and agName != ''">
+				ag_name like "%"#{agName}"%"
+			</if>
+		</where>
+	</select>
+	
+	<!--结果集 -->
+    <select id="selectPageByQueryVo" parameterType="com.ocpap.rest.entity.QueryVo"
+		resultMap="BaseResultMap">
+		select * from tb_admin_group
+		<where>
+			<if test="agName != null and agName != ''">
+				ag_name like "%"#{agName}"%"
+			</if>
+		</where>
+		limit #{startRow},#{size}
+  </select>
+  <!--查询全部 -->
+   <select id="selectAllGroup"
+		resultMap="BaseResultMap">
+		select * from tb_admin_group
+  </select>
+	
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_admin_group
+    where ag_id = #{agId,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" parameterType="com.ocpap.rest.entity.AdminGroup" >
+    insert into tb_admin_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="agId != null" >
+        ag_id,
+      </if>
+      <if test="agName != null" >
+        ag_name,
+      </if>
+      <if test="agInfo != null" >
+        ag_info,
+      </if>
+      <if test="agStatus != null" >
+        ag_status,
+      </if>
+      <if test="agAuth != null" >
+        ag_auth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="agId != null" >
+        #{agId,jdbcType=INTEGER},
+      </if>
+      <if test="agName != null" >
+        #{agName,jdbcType=VARCHAR},
+      </if>
+      <if test="agInfo != null" >
+        #{agInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="agStatus != null" >
+        #{agStatus,jdbcType=BIT},
+      </if>
+      <if test="agAuth != null" >
+        #{agAuth,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ocpap.rest.entity.AdminGroup" >
+    update tb_admin_group
+    <set >
+      <if test="agName != null" >
+        ag_name = #{agName,jdbcType=VARCHAR},
+      </if>
+      <if test="agInfo != null" >
+        ag_info = #{agInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="agStatus != null" >
+        ag_status = #{agStatus,jdbcType=BIT},
+      </if>
+      <if test="agAuth != null" >
+        ag_auth = #{agAuth,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ag_id = #{agId,jdbcType=INTEGER}
+  </update>
+</mapper>
